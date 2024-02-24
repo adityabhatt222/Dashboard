@@ -1,0 +1,28 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post List</title>
+    <link rel="stylesheet" href="{% static 'CSS/post_list.css' %}">
+</head>
+<body style="background-color: #fff;">
+    <h1>Post List</h1>
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.title }}</li>
+            <p>{{ post.description }}</p>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            {% endif %}
+            <form action="{% url 'delete_post' post.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        {% endfor %}
+    </ul>
+</body>
+
+</body>
+</html>
